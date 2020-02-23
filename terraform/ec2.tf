@@ -13,10 +13,6 @@ data "aws_ami" "testPracticalTask" {
   owners = var.distro_owners
 }
 
-resource "aws_placement_group" "testPracticalTask" {
-  name     = "testPracticalTask"
-  strategy = "cluster"
-}
 
 resource "aws_launch_template" "testPracticalTask" {
   name_prefix   = "testPracticalTask"
@@ -28,6 +24,7 @@ resource "aws_launch_configuration" "testPracticalTask" {
   name_prefix   = "testPracticalTask-instance-"
   image_id      = data.aws_ami.testPracticalTask.id
   instance_type = "t2.micro"
+  iam_instance_profile = aws_iam_instance_profile.testPracticalTask.name
 
   lifecycle {
     create_before_destroy = true
@@ -42,22 +39,8 @@ resource "aws_autoscaling_group" "testPracticalTask" {
   health_check_type         = "ELB"
   desired_capacity          = 1
   force_delete              = true
-  placement_group           = aws_placement_group.testPracticalTask.id
   vpc_zone_identifier       = [aws_subnet.az_private.id]
-
-  initial_lifecycle_hook {
-    name                 = "testPracticalTask"
-    default_result       = "CONTINUE"
-    heartbeat_timeout    = 2000
-    lifecycle_transition = "autoscaling:EC2_INSTANCE_LAUNCHING"
-
-    notification_metadata = <<EOF
-{
-  "foo": "bar"
-}
-EOF
-    role_arn                = aws_iam_role.testPracticalTask.arn
-  }
+  target_group_arns = [aws_lb_target_group.testPracticalTask.arn]
 
   launch_template {
     id      = aws_launch_template.testPracticalTask.id

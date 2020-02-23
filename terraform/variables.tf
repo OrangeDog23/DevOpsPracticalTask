@@ -8,8 +8,13 @@ variable "base_cidr_block" {
 }
 
 variable "availability_zone" {
-  description = "A availability zone in which to create subnets"
+  description = "A availability zone which used to create subnets"
   default = "eu-west-1a"
+}
+
+variable "availability_zone_2" {
+  description = "another availability zone wich used to  to create subnets"
+  default = "eu-west-1b"
 }
 
 variable "distro_name" {
