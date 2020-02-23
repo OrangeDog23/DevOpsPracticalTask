@@ -17,13 +17,20 @@ variable "availability_zone_2" {
   default = "eu-west-1b"
 }
 
-variable "distro_name" {
-  description = "Image from marketplace for creating ami image"
-  default = "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
+variable "asg_ami_id" {
+  description = "Ami for creating ASG"
+  default = "ami-07042e91d04b1c30d"
 }
 
-variable "distro_owners" {
-  description = "Owners of image to search for"
-  default = ["099720109477"]
+variable "packer_url" {
+  description = "Packer url for jenkins installation"
+  default = "https://releases.hashicorp.com/packer/1.5.4/packer_1.5.4_linux_amd64.zip"
+}
+
+
+
+variable "jenkins_key" {
+  description = "key to access to jenkins instance"
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/LN5daUw6oYkVlv/SQqLTJ1dC2O35RQMq7UmIHyCSU25RzAQiqYGPzYrnXJaYYMQn/kvawrwmAtnegKBp2+Tn1wWMx6jUlV6BMBCMWPKOrKZkaXIySnT/55y4/pu9jsfJYQ8KLiapit6eMyR0FX7X1PC04fF4QC4w2wr+F6XTW5+R+KMnyuVGV49RztPrBO3gGzr3bMF4cECnAtf0OQBHi94lfUkczAOmX0uNQOr4ynA5gZkCVivmpXE25+lt8Nff67AUXd6yhhJq2N4Zq0wBq0iIlkRMAhuBMG31D3lwuczUGrH+/3s8geQMVvnt5IQQfLhVCBLhampM5UTUGbEMyktpH+w+JPi/7c1x27tBEC6IbMOXlsZm3HkiIAt29wWnD8p8rQx2N5KR+KqtfOgJya0F4MRwGPxndH25jD7uJeYoevZCt5FNi1iGq4Yd48dyKM1+aOZaGGiQ9h1FhiSL9Ul6+9fVnJNpGGn2sPYO56Zq4uv72Sjj5rFH9KZBnvE= devops_test_user"
 }
 

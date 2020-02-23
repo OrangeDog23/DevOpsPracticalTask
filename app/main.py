@@ -5,6 +5,7 @@ import boto3
 from botocore.exceptions import ClientError
 import sys
 import logging
+from waitress import serve
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler(sys.stdout)
@@ -105,3 +106,4 @@ def main():
     
 if __name__=="__main__":
     main()
+    serve(app, host='0.0.0.0', port=8080)
