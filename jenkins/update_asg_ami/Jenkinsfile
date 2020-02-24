@@ -1,0 +1,41 @@
+def ami_id
+
+pipeline {
+    agent any
+    stages {
+	
+	stage("Checkout") {
+	    steps {
+		git branch: "master", credentialsId: 'git_key', url: 'https://github.com/OrangeDog23/DevOpsPracticalTask.git'
+	    }
+	}
+
+	stage('remove old images') {
+	    steps {
+		print "Not implemented yet"
+	    }
+	}
+
+	stage('build packer ami package') {
+	    steps {
+		dir('packer') {
+		    script {
+			sh "packer build devops-task.json"
+			ami_id = sh(script: "grep -oP '(ami-[[:alnum:]]*)' manifest.json", returnStdout: true)
+		    }
+		}
+	    }
+	}
+
+	stage('update image in asg') {
+	    steps {
+		dir('terraform'){
+		    sh "terraform init"
+		    sh "terraform workspace new  DevOpsPracticalTask || terraform workspace select DevOpsPracticalTask"
+		    sh "terraform plan -out plan.plan -var 'asg_ami_id=${ami_id}"
+		    sh "terraform apply -auto-approve plan.out"
+		}
+	    }
+	}
+    }
+}
