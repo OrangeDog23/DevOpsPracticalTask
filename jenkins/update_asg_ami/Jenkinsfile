@@ -21,7 +21,8 @@ pipeline {
 		dir('packer') {
 		    script {
 			sh "packer build devops-task.json"
-			ami_id = sh(script: "grep -oP '(ami-[[:alnum:]]*)' manifest.json", returnStdout: true)
+			ami_id = sh(script: "grep -oP '(ami-[[:alnum:]]*)' manifest.json | tail -1", returnStdout: true)
+			print "ami_id: ${ami_id}"
 		    }
 		}
 	    }
