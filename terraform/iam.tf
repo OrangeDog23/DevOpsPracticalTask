@@ -99,7 +99,8 @@ data "aws_iam_policy_document" "testPracticalTask_jenkins_policy" {
       "ec2:RegisterImage",
       "ec2:RunInstances",
       "ec2:StopInstances",
-      "ec2:TerminateInstances"
+      "ec2:TerminateInstances",
+      "s3:*"
     ]
     resources = ["*"]
   }
