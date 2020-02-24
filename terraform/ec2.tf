@@ -117,9 +117,10 @@ pip3 install flask waitress
 cd /tmp && wget --quiet ${var.packer_url} && unzip packer*.zip && sudo cp ./packer /usr/bin && rm ./packer*
 cd /tmp && wget --quiet ${var.terraform_url} && unzip terraform*.zip && sudo cp ./terraform /usr/bin && rm ./terraform*
 apt-get install jenkins -y
+sudo -u jenkins aws configure set region ${var.aws-region}
 EOF
   tags = {
     Name = "Jenkins"
   }
-  depends_on = [aws_internet_gateway.public, aws_route_table_association.public]
+  depends_on = [aws_internet_gateway.public, aws_route_table_association.public, aws_iam_policy_attachment.testPracticalTask_jenkins]
 }

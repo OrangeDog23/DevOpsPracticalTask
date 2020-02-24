@@ -32,7 +32,7 @@ pipeline {
 		dir('terraform'){
 		    sh "terraform init"
 		    sh "terraform workspace new  DevOpsPracticalTask || terraform workspace select DevOpsPracticalTask"
-		    sh "terraform plan -out plan.plan -var 'asg_ami_id=${ami_id}'"
+		    sh "terraform plan -out plan.out -var 'asg_ami_id=${ami_id}'"
 		    sh "terraform apply -auto-approve plan.out"
 		}
 	    }
