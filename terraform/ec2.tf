@@ -36,7 +36,7 @@ resource "aws_autoscaling_group" "testPracticalTask" {
   name                      = "testPracticalTask"
   max_size                  = 1
   min_size                  = 1
-  health_check_grace_period = 3000000
+  health_check_grace_period = 30
   health_check_type         = "ELB"
   desired_capacity          = 1
   force_delete              = true
