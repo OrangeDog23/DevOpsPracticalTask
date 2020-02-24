@@ -13,7 +13,7 @@ variable "availability_zone" {
 }
 
 variable "availability_zone_2" {
-  description = "another availability zone wich used to  to create subnets"
+  description = "another availability zone wich used to create subnets"
   default = "eu-west-1b"
 }
 
