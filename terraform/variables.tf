@@ -39,6 +39,6 @@ variable "jenkins_key" {
 
 variable "allowed_ip" {
   description = "cidr blocks to allow access to jenkins and app via http:8080"
-  default = ["95.106.214.219/32"]
+  default = ["95.106.216.10/32"]
 }
 
