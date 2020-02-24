@@ -1,0 +1,11 @@
+[Unit]
+Description=start python script
+After=network.target
+
+[Service]
+User=ubuntu
+ExecStart=/usr/bin/python3 /home/ubuntu/app/main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

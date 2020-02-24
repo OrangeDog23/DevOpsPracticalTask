@@ -4,7 +4,7 @@ data "aws_iam_policy_document" "testPracticalTask-assume" {
 
     principals {
       type        = "Service"
-      identifiers = ["autoscaling.amazonaws.com"]
+      identifiers = ["ec2.amazonaws.com"]
     }
   }
 }
@@ -20,7 +20,10 @@ data "aws_iam_policy_document" "testPracticalTask-policy" {
     resources = ["*"]
   }
   statement {
-    actions = ["sns:*"]
+    actions = [
+      "sns:*",
+      "ses:*"
+    ]
     resources = ["*"]
   }
 }
