@@ -3,7 +3,7 @@
 	"type": "amazon-ebs",
 	"region": "eu-west-1",
 	"force_deregister": true,
-	"force_delete_snapshot": true
+	"force_delete_snapshot": true,
 	"source_ami_filter": {
 	    "filters": {
 		"virtualization-type": "hvm",
