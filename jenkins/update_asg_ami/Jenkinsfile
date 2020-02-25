@@ -10,12 +10,6 @@ pipeline {
 	    }
 	}
 
-	stage('remove old images') {
-	    steps {
-		print "Not implemented yet"
-	    }
-	}
-
 	stage('build packer ami package') {
 	    steps {
 		dir('packer') {
