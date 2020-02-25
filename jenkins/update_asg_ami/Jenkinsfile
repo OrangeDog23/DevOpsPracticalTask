@@ -34,7 +34,7 @@ pipeline {
 		    sh "terraform init"
 		    sh "terraform workspace new  devops_test || terraform workspace select devops_test"
 		    sh "terraform refresh"
-		    sh "terraform plan -out plan.out -var \'asg_ami_id=${ami_id}\'"
+		    sh "terraform plan -out plan.out -var asg_ami_id=${ami_id}"
 		    sh "terraform apply -auto-approve plan.out"
 		}
 	    }
