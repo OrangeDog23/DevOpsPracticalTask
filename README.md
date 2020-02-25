@@ -13,16 +13,19 @@
 
 1. Clone project
 2. Change terraform/variables.tf according your ifrastructure. In case if you want to change aws-region, you should do it also in terraform/main.tf and in packer/devops-task.json (don't forget to change ssh public key and allowed ip)
-3. Create S3 bucket with name, mentioned in terraform/main.tf(in which will be saved terraform state)
-4. Change directory to terraform/
-5. Run terraform plan generating `terraform plan -out plan.out`
-6. Apply terraform plan `terraform apply plan.out`, as result you'll get ip of jenkins instance and url for app(inactive yet jenkins will be configured)
+3. push your changes to repository
+4. Create S3 bucket with name, mentioned in terraform/main.tf(in which will be saved terraform state)
+5. Change your directory to packer/
+6. run command `packer build devops-task.json`, fetch ami-id from response
+7. Change directory to terraform/
+8. Run terraform plan generating `terraform plan -out plan.out -var asg_ami_id={ami-id}`
+9. Apply terraform plan `terraform apply plan.out`, as result you'll get ip of jenkins instance and url for access to app
 
 ### Configure Jenkins
 1. visit address  `http://{jenkins_ip}:8080` with your favorite browser 
 2. login to jenkins "Hello page", using token from jenkins instance(it should be available via ssh console)
 3. Apply recommended parameters, set new password, finish installation wizard 
-4. Add credentials for git repository(username and password)
+4. Add credentials for git repository(username and password), set credentials id: git_key
 5. Add new pipeline, set:
   1. Name: any, not empty
   2. Type: pipeline
