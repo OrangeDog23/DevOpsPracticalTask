@@ -36,7 +36,7 @@ resource "aws_autoscaling_group" "testPracticalTask" {
   name                      = "testPracticalTask"
   max_size                  = 1
   min_size                  = 1
-  health_check_grace_period = 30
+  health_check_grace_period = 300
   health_check_type         = "ELB"
   desired_capacity          = 1
   force_delete              = true
@@ -75,6 +75,13 @@ resource "aws_security_group" "testPracticalTask_jenkins_sg" {
     # Please restrict your ingress to only necessary IPs and ports.
     # Opening to 0.0.0.0/0 can lead to security vulnerabilities.
     cidr_blocks = var.allowed_ip
+  }
+  # access for github webhooks
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["192.30.252.0/22", "185.199.108.0/22", "140.82.112.0/20"]
   }
   ingress {
     from_port = 22
